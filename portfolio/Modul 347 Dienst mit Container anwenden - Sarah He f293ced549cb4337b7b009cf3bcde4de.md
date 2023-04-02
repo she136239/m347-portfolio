@@ -425,3 +425,6 @@ Prüfen:
 
 
 Nach Lens Installation sollte MicroK8s in Lens angezeigt werden:
+
+![image](https://user-images.githubusercontent.com/126601670/229376300-f4e97291-e517-4f53-bf69-543165c03c66.png)
+
