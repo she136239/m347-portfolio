@@ -393,15 +393,35 @@ http://localhost:8000
 
 ![221441163-fa22bc8a-8536-49a5-a5fd-716bef655944.png](Modul%20347%20Dienst%20mit%20Container%20anwenden%20-%20Sarah%20He%20f293ced549cb4337b7b009cf3bcde4de/221441163-fa22bc8a-8536-49a5-a5fd-716bef655944.png)
 
-## Kubernetes Kubernetes ist eine Open-Source-Plattform, welche das einfache Verwalten von Containerlasten wie containerisierten Applikationen ermöglicht. Auch erleichtert Kubernetes das automatisierte starten von Stack Services. Auch bietet Kubernetes eine containerzentrale Managementumgebung. ## Microservices Microservices ist eine Art bzw. Archidektur der Anwendunsentwicklung. Dabei wird eine Anwendung in kleine unabhängige Services unterteilt, welche über API's zusammen kommunizieren. Dabei resultiert der Vorteil, das einzelne Services gewartet bzw. verändert werden können, ohne das die ganze Anwendung darunter leidet oder nicht mehr funktioniert. Auch können Entwickler erweiterungen schnell und unkompliziert einbauen. ## Lightweightkubernetes Vergleich |                      | Minikube | K3s      | MicroK8s  | 
-| --------             | -------- | -------- | --------  | 
-| Entwickler           | Kubernetes projekt   | Rancher  | Canonical    | 
-| Installation   | Sehr Einfach   | Einfach   | Einfach    | 
-| Modularität          | Tief     | Mittel   | Hoch      | 
-| Multinode Clustering | Einfach  | Schwierig| Einfach   | 
-| IOT                  | Nein     | Ja       | Ja        | 
-| Production deployment| Nein     | Ja       | Ja        | ## MicroK8s Installation     sudo usermod -a -G microk8s $USER
-    sudo chown -f -R $USER ~/.kube
-    sudo chown -f -R $USER ~/.kube
-    SU - $USER Prüfen:     microk8s status --wait-ready 
-Nach Lens Installation sollte MicroK8s in Lens angezeigt werden:hat Kontextmenü
+## Kubernetes
+
+Kubernetes ist eine Open-Source-Plattform, welche das einfache Verwalten von Containerlasten wie containerisierten Applikationen ermöglicht. Auch erleichtert Kubernetes das automatisierte starten von Stack Services. Auch bietet Kubernetes eine containerzentrale Managementumgebung.
+
+## Microservices
+
+Microservices ist eine Art bzw. Archidektur der Anwendunsentwicklung. Dabei wird eine Anwendung in kleine unabhängige Services unterteilt, welche über API's zusammen kommunizieren. Dabei resultiert der Vorteil, das einzelne Services gewartet bzw. verändert werden können, ohne das die ganze Anwendung darunter leidet oder nicht mehr funktioniert. Auch können Entwickler erweiterungen schnell und unkompliziert einbauen.
+
+## Lightweightkubernetes Vergleich
+
+|                      | Minikube | K3s      | MicroK8s  | 
+| --------             | -------- | -------- | --------  | 
+| Entwickler           | Kubernetes projekt   | Rancher  | Canonical    | 
+| Installation   | Sehr Einfach   | Einfach   | Einfach    | 
+| Modularität          | Tief     | Mittel   | Hoch      | 
+| Multinode Clustering | Einfach  | Schwierig| Einfach   | 
+| IOT                  | Nein     | Ja       | Ja        | 
+| Production deployment| Nein     | Ja       | Ja        | 
+
+## MicroK8s Installation
+
+    sudo usermod -a -G microk8s $USER
+    sudo chown -f -R $USER ~/.kube
+    sudo chown -f -R $USER ~/.kube
+    SU - $USER
+
+Prüfen:
+
+    microk8s status --wait-ready
+
+
+Nach Lens Installation sollte MicroK8s in Lens angezeigt werden:
