@@ -428,3 +428,117 @@ Nach Lens Installation sollte MicroK8s in Lens angezeigt werden:
 
 ![image](https://user-images.githubusercontent.com/126601670/229376300-f4e97291-e517-4f53-bf69-543165c03c66.png)
 
+## Raft-Konsens-Algorithmus
+
+Der Raft-Konsensalgorithmus ist ein Protokoll, das für die Verwaltung von verteilten Systemen verwendet wird, um eine gemeinsame Übereinstimmung zwischen verschiedenen Prozessen zu erzielen. Der Algorithmus ist nach dem Fluss-Rafting-Sport benannt, bei dem Teams von Menschen zusammenarbeiten, um Hindernisse auf einem Fluss zu überwinden.
+
+In verteilten Systemen besteht das Problem darin, dass es schwierig sein kann, eine gemeinsame Übereinstimmung darüber zu erzielen, welcher Prozess was tut. Der Raft-Algorithmus löst dieses Problem, indem er eine Leader-Node auswählt, die für die Koordination aller Aktionen verantwortlich ist. Alle anderen Nodes werden Follower und akzeptieren den Status des Leader Nodes als gültigen Zustand.
+
+Der Raft-Algorithmus bietet einige Vorteile gegenüber anderen Konsensalgorithmen wie zum Beispiel einer einfachen Implementierung, einer besseren Lesbarkeit des Codes und einer schnelleren Wiederherstellung nach einem Node-Ausfall. Es ist einer der am häufigsten verwendeten Algorithmen für die Implementierung von verteilten Systemen und wird in vielen Anwendungen wie Datenbanken, Cloud-Services und Blockchains eingesetzt.
+
+Ein Cluster wird oft mit einer ungeraden Anzahl von Nodes eingerichtet, um die Wahrscheinlichkeit einer geteilten Abstimmung im Konsensalgorithmus zu reduzieren.
+
+### Warum ungerade Anzahl Nodes
+
+Bei einem verteilten System wie einem Cluster müssen sich die Nodes auf eine gemeinsame Entscheidung bezüglich des Zustands des Systems einigen. In vielen Konsensalgorithmen wird dazu eine Abstimmung durchgeführt, bei der jede Node eine Stimme hat. Wenn die Anzahl der Nodes gerade ist und es zu einer geteilten Abstimmung kommt, bei der die Stimmen gleichmäßig zwischen den Nodes aufgeteilt werden, kann es schwierig sein, eine Entscheidung zu treffen und das System kann in einen inkonsistenten Zustand geraten.
+
+Durch die Verwendung einer ungeraden Anzahl von Nodes kann dieses Problem vermieden werden. Wenn eine geteilte Abstimmung auftritt, wird immer eine Node mehr Stimmen haben als die andere Seite, und es kann eine Entscheidung getroffen werden, die das System in einen konsistenten Zustand bringt.
+
+Obwohl eine ungerade Anzahl von Nodes das Problem der geteilten Abstimmung reduziert, ist es nicht immer eine Garantie dafür, dass das System in jedem Fall korrekt funktioniert. Es gibt andere Faktoren wie Netzwerkprobleme oder unerwartete Ausfälle, die ebenfalls zu inkonsistenten Zuständen führen können.
+
+### Wie wird der leader gewählt?
+
+Im Raft-Konsensalgorithmus wird der Leader durch einen Wahlprozess gewählt. Dieser Wahlprozess beginnt in der Regel, wenn ein Follower-Node keinen Kontakt mehr zum aktuellen Leader hat. Der Follower startet dann eine Wahl und sendet eine Request Vote-Nachricht an alle anderen Nodes im System.
+
+Die anderen Nodes prüfen, ob sie bereits für einen anderen Kandidaten gestimmt haben. Wenn sie das noch nicht getan haben, stimmen sie für den Kandidaten. Um gewählt zu werden, muss ein Kandidat mindestens die Hälfte der Stimmen der Nodes im System erhalten. Wenn ein Kandidat diese Mehrheit erhält, wird er zum neuen Leader ernannt und sendet eine Heartbeat-Nachricht an alle anderen Nodes, um seine Autorität zu etablieren.
+
+Wenn kein Kandidat eine Mehrheit erhält, wird der Wahlprozess wiederholt. In diesem Fall wird jedoch eine zufällige Wartezeit vor der Wahl eingeführt, um zu verhindern, dass es zu einer Endlosschleife kommt, in der sich die Nodes immer wieder gegenseitig wählen, ohne dass ein Leader bestimmt wird.
+
+## Kubernetes Abb
+
+ABB (Atomic Broadcast Protocol) ist ein Protokoll, das zur Koordination von Aktivitäten zwischen den Nodes in einem Kubernetes-Cluster verwendet wird. Es wird normalerweise im Rahmen von Kubernetes verwendet, um sicherzustellen, dass Änderungen am Cluster-Status von allen Nodes im Cluster einheitlich und atomar umgesetzt werden.
+
+Die Implementierung von ABB in Kubernetes erfolgt über den Raft-Konsensalgorithmus, der von der Control Plane verwendet wird, um den Cluster-Status zu verwalten. Die Control Plane besteht aus mehreren Komponenten wie dem API Server, dem Scheduler, dem Controller Manager und dem etcd-Cluster.
+
+Das etcd-Cluster ist ein verteiltes Key-Value-Store-System, das von der Control Plane verwendet wird, um den Cluster-Status und die Konfigurationsinformationen zu speichern. Jeder Node im Kubernetes-Cluster hat eine lokale Kopie des etcd-Clusters, um schnell auf Änderungen reagieren zu können.
+
+Sobald ein Node im Cluster einen Änderungsantrag stellt, wird der Antrag an den API Server gesendet. Der API Server prüft dann, ob der Änderungsantrag gültig ist, und leitet ihn an den etcd-Cluster weiter, der die Änderung in seinen lokalen Speicher schreibt. Wenn der etcd-Cluster die Änderung akzeptiert hat, sendet er eine Bestätigungsnachricht an den API Server, der die Änderung an alle anderen Nodes im Cluster weitergibt.
+
+Jeder Node im Cluster erhält die Änderung vom API Server und aktualisiert seinen lokalen Status entsprechend. Der Raft-Konsensalgorithmus gewährleistet, dass jeder Node im Cluster denselben Status hat, indem er sicherstellt, dass Änderungen atomar und konsistent umgesetzt werden.
+
+Durch diese Implementierung von ABB über den Raft-Konsensalgorithmus kann Kubernetes sicherstellen, dass der Cluster-Status atomar und konsistent ist, und so die Zuverlässigkeit und Verfügbarkeit des Clusters verbessern.
+
+## Dashboard
+
+    microk8s dashboard-proxy
+    
+Anschliessend die ausgegebene IP zum zugreifen verwenden und den Token dazu eingeben
+
+![image](https://user-images.githubusercontent.com/126601670/229377005-4c3cef67-c3f2-4f9f-92cc-07b70a6127cb.png)
+
+
+## Self Healing
+In Kubernetes hat man die möglichkeit mit einem Controll Plane Prozess den Cluster quasi unsterblich zu machen. Dabei Konfiguriert man einen Deployment Controller so, dass er den Cluster beobachtet und bei einer Abweichung die problematischen Pods wieder startet: spec: replicas:3 im yaml file.
+
+## Scale-Up / Scale-Down
+
+Mit Kubernetes hat man die Option, seine Cluster einfach zu skallieren. Dafür kann man entweder einen Befehl eingeben, welchen ich unten aufgeführt habe oder mann hat die Möglichkeit das ganze Persistent in die Config Datei zu schreiben, damit dies bei einer aktualisierung der Version vorhanden bleibt. So kann man erkennen, wenn man einen zu grossen oder zu kleinen Workload hat, und anschliessend ein Scale Up oder Scale Down vornehmen. Zudem besteht mit Kubernetes neuerding die möglichkeit, automatic horizontal autoscaling zu verwenden, wodurch der Cluster selbst merkt, wann die Last zu gross bzw. zu klein ist und anschliessend automatisiert Pods repliziert.
+
+## Rolling Update
+
+        microk8s kubectl apply -f "Pfad zu deploy v2"
+        
+![image](https://user-images.githubusercontent.com/126601670/229377072-ad6e4f77-9049-4a84-b44d-3c572a414dc4.png)
+
+
+## Blue-Green Deployment
+
+Blue-Green Deployment ist ein Konzept der Entwicklung, bei dem das Zerodowntime konzept erhalten wird, indem man die neue Version der Umgebung (Green) parrallel zu der alten (Blue) startet und den Datenverkehr erst dann auf die neue Leitet, wenn diese bereit dazu ist. Anschliessend kann die Alte Version aus dem Cycle genommen werden.
+
+## Eigene Notitzen
+
+### Master Nodes
+
+Sollten immer 3 bis 5 vorhanden sein in verschiedenen Räumen, um die Hochverfügbarkeit zu gewährleisten, da die Masters das Gehirn des Clusters sind.
+
+Aufgaben: 
+API Server
+Scheduler
+Key/Value-Store
+Cloud Controller
+
+![image](https://user-images.githubusercontent.com/102524498/225909289-1ad71147-30d6-45db-849b-4df54f6b0872.png)
+
+Im Kubernetes-Cluster gibt es verschiedene Komponenten, die jeweils unterschiedliche Aufgaben haben. Der API-Server dient als direkte Schnittstelle für Benutzer, um Befehle an den Cluster zu senden und Antworten vom Server zu empfangen.
+
+Der Scheduler ist für die Auswahl der Nodes verantwortlich, auf denen die Nutzeranwendungen ausgeführt werden sollen. Der Key/Value-Store speichert den aktuellen Zustand des Clusters sowie aller Anwendungen.
+
+Der Controller Manager überwacht die Aktivitäten im Cluster und führt verschiedene Aufgaben aus, wie zum Beispiel Reparaturen von fehlerhaften Containern oder Neustarts von abgestürzten Containern.
+
+Der Cloud Controller ermöglicht es Kubernetes, sich mit Cloud-Services wie Speicher- und Lastenausgleichsdiensten zu integrieren
+
+
+### Worker Nodes
+Die Nodes im Kubernetes-Cluster sind dafür verantwortlich, die Nutzeranwendungen auszuführen und können entweder unter Linux oder Windows betrieben werden. Während Linux Nodes nur Linux-Anwendungen ausführen können, sind Windows Nodes auf die Ausführung von Windows-Anwendungen spezialisiert.
+
+Die Worker Nodes im Cluster sind in der Regel größer und benötigen mehr Ressourcen als die Master Nodes, da sie alle Anwendungen ausführen. Jeder Node verfügt über verschiedene Services wie den Kubelet, der als Agent des Clusters fungiert und mit der Control-Plane kommuniziert, um Aufgaben zu empfangen und den Status der ausgeführten Aufgaben zu melden. Die Container-Runtime ist ein weiterer wichtiger Service, der Container startet und ausführt.
+
+![image](https://user-images.githubusercontent.com/102524498/225914230-93b3fa16-dc37-4f34-b43b-851249f1697c.png)
+
+
+## Wichtige Befehle
+
+    microk8s start 
+    microk8s status --wait-ready
+    microk8s enable dashboard dns registry ingress
+    microk8s kubectl get nodes
+    microk8s kubectl cluster-info
+    microk8s enable metallb
+
+    Sie werden nach einem IP Range gefragt. Geben Sie hier die IP Ihres Clusters ein. Im Beispiel oben: 172.20.153.220-172.20.153.240
+    
+    microk8s kubectl get componentstatus
+    microk8s kubectl create -f "Pfad"
+    microk8s kubectl get rc
+    microk8s kubectl apply -f todo-app-deploy-v2.yaml
+    microk8s kubectl scale --replicas 2 deployment/todo-app-deployment
