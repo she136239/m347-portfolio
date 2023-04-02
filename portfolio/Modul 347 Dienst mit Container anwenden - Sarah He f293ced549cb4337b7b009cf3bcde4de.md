@@ -565,5 +565,24 @@ Standardmäßig wird jede Kubernetes-Installation mit einem Default-Namespace ge
 ## Printscreens -------
 ![image](https://user-images.githubusercontent.com/126601670/229377383-c55bb532-623c-47ae-8f8f-31330a4c5fe6.png)
 
+![image](https://user-images.githubusercontent.com/126601670/229377447-5461ec6d-96e9-491d-89a7-94f7b23ee7f9.png)
 
-![image](https://user-images.githubusercontent.com/126601670/229377408-5c4dad11-9d3e-46b1-a062-7120d18ba1ef.png)
+## Sockshop Printscreens
+
+![image](https://user-images.githubusercontent.com/126601670/229377501-db4588eb-3dee-4075-af7b-ecf389aee1cd.png)
+![image](https://user-images.githubusercontent.com/126601670/229377528-75032f3e-8bd9-47e4-b68b-3c3f8f18fbe7.png)
+
+## Kiali Printscreen
+
+![image](https://user-images.githubusercontent.com/126601670/229377567-ca6e7b0a-4523-41be-891d-85884120e6b7.png)
+
+## Prometheus Printscreen
+
+![image](https://user-images.githubusercontent.com/126601670/229377591-de259d0e-12cc-4f53-bb2d-ac5c803100db.png)
+
+## Grafana Printscreen
+
+![image](https://user-images.githubusercontent.com/126601670/229377614-c631ebeb-447c-4e84-ab92-c28967eb404c.png)
+
+Keine Ahnung wieso Grafana nicht funktioniert, habe Datasource korrekt hinzugefügt und auch den Rest so wie beschrieben gemacht.
+
