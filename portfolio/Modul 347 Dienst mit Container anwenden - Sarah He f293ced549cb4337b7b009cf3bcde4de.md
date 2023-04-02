@@ -576,13 +576,9 @@ Standardmäßig wird jede Kubernetes-Installation mit einem Default-Namespace ge
 
 ![image](https://user-images.githubusercontent.com/126601670/229377567-ca6e7b0a-4523-41be-891d-85884120e6b7.png)
 
-## Prometheus Printscreen
-
-![image](https://user-images.githubusercontent.com/126601670/229377591-de259d0e-12cc-4f53-bb2d-ac5c803100db.png)
-
 ## Grafana Printscreen
 
 ![image](https://user-images.githubusercontent.com/126601670/229377614-c631ebeb-447c-4e84-ab92-c28967eb404c.png)
 
-Keine Ahnung wieso Grafana nicht funktioniert, habe Datasource korrekt hinzugefügt und auch den Rest so wie beschrieben gemacht.
+Keine Ahnung wieso Grafana nicht funktioniert, habe Datasource von Prometheus korrekt hinzugefügt und auch den Rest so wie beschrieben gemacht.
 
