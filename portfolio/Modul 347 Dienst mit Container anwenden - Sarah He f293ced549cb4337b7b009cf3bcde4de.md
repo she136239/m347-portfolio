@@ -385,13 +385,9 @@ Im Browser
 http://localhost
 ```
 
-![221441134-77e2bd21-d7fc-417f-9954-ca09f4a794e8.png](Modul%20347%20Dienst%20mit%20Container%20anwenden%20-%20Sarah%20He%20f293ced549cb4337b7b009cf3bcde4de/221441134-77e2bd21-d7fc-417f-9954-ca09f4a794e8.png)
-
 ```docker
 http://localhost:8000
 ```
-
-![221441163-fa22bc8a-8536-49a5-a5fd-716bef655944.png](Modul%20347%20Dienst%20mit%20Container%20anwenden%20-%20Sarah%20He%20f293ced549cb4337b7b009cf3bcde4de/221441163-fa22bc8a-8536-49a5-a5fd-716bef655944.png)
 
 ## Kubernetes
 
