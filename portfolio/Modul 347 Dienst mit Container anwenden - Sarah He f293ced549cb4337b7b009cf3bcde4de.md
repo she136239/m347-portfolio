@@ -542,3 +542,28 @@ Die Worker Nodes im Cluster sind in der Regel größer und benötigen mehr Resso
     microk8s kubectl get rc
     microk8s kubectl apply -f todo-app-deploy-v2.yaml
     microk8s kubectl scale --replicas 2 deployment/todo-app-deployment
+
+## Node IP
+
+Die Node IP ist eine Adresse einer physischen oder virtuellen Maschine, welche eine Node Rolle im Cluster hat. Dabei ist die Adresse die gleiche wie die der Netzwerkkarte. Die Node IP wird meist als External IP verwendet, um von ausserhalb auf einen Service zuzugreifen.
+
+## Cluster IP
+
+Die Cluster IP ist eine virtuelle IP-Adresse, welche einem Service zugeordnet ist. Sie wird dazu verwendet, um auf den Service innerhalb des Clusters zuzugreifen. Die interne Kommunikation läuft darüber ab.
+
+## LoadBalancer
+
+Ein Kubernetes-Loadbalancer ist ein Typ von Service, der dazu beiträgt, den Netzwerkverkehr über mehrere innerhalb eines Kubernetes-Clusters ausgeführte Pods zu verteilen. Er fungiert als Vermittler zwischen eingehenden Anfragen und den Pods und stellt sicher, dass jeder Pod einen fairen Anteil des Verkehrs erhält. Kubernetes-Loadbalancer bieten eine zuverlässige Möglichkeit, Anwendungen zu skalieren, indem sie die Weiterleitung des Netzwerkverkehrs automatisch an die verfügbaren und gesunden Pods anpassen. Loadbalancer können auf verschiedene Arten konfiguriert werden, wie z.B. mit Round-Robin- oder Least-Connection-Algorithmen, und können auch TLS-Terminierung und Sitzungspersistenz unterstützen. Durch die Verwendung eines Kubernetes-Loadbalancers können Organisationen sicherstellen, dass ihre Anwendungen hochverfügbar bleiben und auf Benutzeranfragen reagieren.
+
+## Namepsaces
+
+Ein Kubernetes Namespace ist ein virtueller Cluster innerhalb eines Kubernetes-Clusters, der dazu dient, Objekte wie Pods, Services und Deployments voneinander zu isolieren. Ein Namespace stellt eine logische Gruppierung von Ressourcen dar und ermöglicht es mehreren Teams, Anwendungen oder Arbeitslasten auf einem Kubernetes-Cluster zu betreiben, ohne dass sie sich gegenseitig beeinträchtigen oder stören.
+Ein Namespace kann auch dazu verwendet werden, um verschiedene Umgebungen wie Entwicklung, Testen und Produktion voneinander zu trennen, indem sie unterschiedliche Namensräume verwenden, um sicherzustellen, dass die Anwendungen in jeder Umgebung getrennt sind und nicht versehentlich in einer anderen Umgebung deployt werden.
+Standardmäßig wird jede Kubernetes-Installation mit einem Default-Namespace geliefert, in dem sich alle Objekte ohne explizite Zuordnung befinden. Wenn man ein Objekt ohne Angabe des Namespaces erstellt, wird es automatisch in diesem Default-Namespace erstellt.
+
+
+## Printscreens -------
+![image](https://user-images.githubusercontent.com/126601670/229377383-c55bb532-623c-47ae-8f8f-31330a4c5fe6.png)
+
+
+![image](https://user-images.githubusercontent.com/126601670/229377408-5c4dad11-9d3e-46b1-a062-7120d18ba1ef.png)
